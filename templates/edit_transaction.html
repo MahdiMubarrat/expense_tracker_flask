@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Transaction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Transaction</h1>
+        <form method="POST" action="">
+            <p>
+                <label for="type">Type:</label>
+                <select name="type" id="type">
+                    <option value="expense" {% if transaction.type == 'expense' %}selected{% endif %}>Expense</option>
+                    <option value="income" {% if transaction.type == 'income' %}selected{% endif %}>Income</option>
+                </select>
+            </p>
+            <p>
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" id="amount" step="0.01" value="{{ transaction.amount }}" required>
+            </p>
+            <p>
+                <label for="category">Category:</label>
+                <select name="category" id="category" required>
+                    <option value="food" {% if transaction.category == 'food' %}selected{% endif %}>Food</option>
+                    <option value="rent" {% if transaction.category == 'rent' %}selected{% endif %}>Rent</option>
+                    <option value="salary" {% if transaction.category == 'salary' %}selected{% endif %}>Salary</option>
+                    <option value="utilities" {% if transaction.category == 'utilities' %}selected{% endif %}>Utilities</option>
+                    <option value="entertainment" {% if transaction.category == 'entertainment' %}selected{% endif %}>Entertainment</option>
+                    <option value="miscellaneous" {% if transaction.category == 'miscellaneous' %}selected{% endif %}>Miscellaneous</option>
+                </select>
+            </p>
+            <p>
+                <label for="currency">Currency:</label>
+                <select name="currency" id="currency" required>
+                    <option value="CAD" {% if transaction.currency == 'CAD' %}selected{% endif %}>CAD</option>
+                    <option value="USD" {% if transaction.currency == 'USD' %}selected{% endif %}>USD</option>
+                    <option value="EUR" {% if transaction.currency == 'EUR' %}selected{% endif %}>EUR</option>
+                    <option value="GBP" {% if transaction.currency == 'GBP' %}selected{% endif %}>GBP</option>
+                    <option value="BDT" {% if transaction.currency == 'BDT' %}selected{% endif %}>BDT</option>
+                    <option value="INR" {% if transaction.currency == 'INR' %}selected{% endif %}>INR</option>
+                </select>
+                <span style="font-size: smaller; color: gray;">Currency Notice: All amounts are converted to CAD.</span>
+            </p>
+            <p>
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="date" value="{{ transaction.date.strftime('%Y-%m-%d') }}" required>
+            </p>
+            <p><input type="submit" value="Save Changes"></p>
+        </form>
+        <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>

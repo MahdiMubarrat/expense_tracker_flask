@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Set Budget</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Set Budget</h1>
+        <form method="POST" action="">
+            <p>
+                <label for="category">Category:</label>
+                <select name="category" id="category" required>
+                    <option value="food">Food</option>
+                    <option value="rent">Rent</option>
+                    <option value="salary">Salary</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="miscellaneous">Miscellaneous</option>
+                    <!-- Add more categories if needed -->
+                </select>
+            </p>
+            <p>
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" id="amount" step="0.01" required>
+            </p>
+            <p>
+                <label for="start_date">Start Date:</label>
+                <input type="date" name="start_date" id="start_date" required>
+            </p>
+            <p>
+                <label for="end_date">End Date:</label>
+                <input type="date" name="end_date" id="end_date" required>
+            </p>
+            <p><input type="submit" value="Set Budget"></p>
+        </form>
+        <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="top-section">
+            <div class="welcome-message">
+                <h1>Welcome, {{ session['username'] }}</h1>
+            </div>
+            <div class="logout-button">
+                <a href="{{ url_for('logout') }}" class="button">Log Out</a>
+            </div>
+        </div>
+
+        {% if notifications %}
+            <div class="notifications">
+                <h2>Notifications</h2>
+                <ul>
+                    {% for notification in notifications %}
+                        <li>{{ notification }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <h2>Spending Patterns Over Time</h2>
+        <div class="chart-container">
+            <canvas id="spendingPatternChart"></canvas>
+        </div>
+
+        <table>
+            <tr>
+                <th>Month</th>
+                <th>Total Spending</th>
+            </tr>
+            {% for date, amount in spending_patterns.items() %}
+            <tr>
+                <td>{{ date }}</td>
+                <td>{{ amount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Spending by Category</h2>
+        <div class="chart-container">
+            <canvas id="spendingByCategoryChart"></canvas>
+        </div>
+
+        <h2>Transactions</h2>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.type }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.category }}</td>
+                <td>{{ transaction.date.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <a href="{{ url_for('edit_transaction', transaction_id=transaction.id) }}">Edit</a>
+                    <a href="{{ url_for('delete_transaction', transaction_id=transaction.id) }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p><a href="{{ url_for('add_transaction') }}" class="button">Add Transaction</a></p>
+
+        <h2>Budgets</h2>
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+            </tr>
+            {% for budget in budgets %}
+            <tr>
+                <td>{{ budget.category }}</td>
+                <td>{{ budget.amount }}</td>
+                <td>{{ budget.start_date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ budget.end_date.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <a href="{{ url_for('edit_budget', budget_id=budget.id) }}">Edit</a>
+                    <a href="{{ url_for('delete_budget', budget_id=budget.id) }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p><a href="{{ url_for('set_budget') }}" class="button">Set Budget</a></p>
+    </div>
+    <footer>
+        &copy; 2024 Expense Tracker. All rights reserved.
+    </footer>
+
+    <script>
+        // Fetch data for spending patterns
+        fetch('/api/spending_patterns')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('spendingPatternChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.dates,
+                        datasets: [{
+                            label: 'Spending Patterns',
+                            data: data.amounts,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+
+        // Fetch data for spending by category
+        fetch('/api/spending_by_category')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('spendingByCategoryChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.categories,
+                        datasets: [{
+                            label: 'Spending by Category',
+                            data: data.amounts,
+                            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                            borderColor: 'rgba(153, 102, 255, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Budget</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Budget</h1>
+        <form method="POST" action="">
+            <p>
+                <label for="category">Category:</label>
+                <select name="category" id="category" required>
+                    <option value="food" {% if budget.category == 'food' %}selected{% endif %}>Food</option>
+                    <option value="rent" {% if budget.category == 'rent' %}selected{% endif %}>Rent</option>
+                    <option value="salary" {% if budget.category == 'salary' %}selected{% endif %}>Salary</option>
+                    <option value="utilities" {% if budget.category == 'utilities' %}selected{% endif %}>Utilities</option>
+                    <option value="entertainment" {% if budget.category == 'entertainment' %}selected{% endif %}>Entertainment</option>
+                    <option value="miscellaneous" {% if budget.category == 'miscellaneous' %}selected{% endif %}>Miscellaneous</option>
+                </select>
+            </p>
+            <p>
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" id="amount" step="0.01" value="{{ budget.amount }}" required>
+            </p>
+            <p>
+                <label for="start_date">Start Date:</label>
+                <input type="date" name="start_date" id="start_date" value="{{ budget.start_date.strftime('%Y-%m-%d') }}" required>
+            </p>
+            <p>
+                <label for="end_date">End Date:</label>
+                <input type="date" name="end_date" id="end_date" value="{{ budget.end_date.strftime('%Y-%m-%d') }}" required>
+            </p>
+            <p><input type="submit" value="Save Changes"></p>
+        </form>
+        <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>
