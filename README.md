@@ -53,7 +53,7 @@ The Expense Tracker is a Python Flask application that allows users to manage th
 
 git clone https://github.com/MahdiMubarrat/expense_tracker_flask
 
-cd EXPENSE_TRACKER_FLASK
+cd expense_tracker_flask
 
 2. Create a virtual environment and activate it:
 
