@@ -49,33 +49,58 @@ The Expense Tracker is a Python Flask application that allows users to manage th
 
 **Installation and Setup**
 
--Clone the repository:
+1. Clone the repository:
 
 git clone https://github.com/MahdiMubarrat/expense_tracker_flask
 
 cd EXPENSE_TRACKER_FLASK
 
--Create a virtual environment and activate it:
+2. Create a virtual environment and activate it:
 
 python -m venv venv
 
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
--Install the required packages:
+3. Install the required packages:
+
+Make sure you have the following dependencies installed. If you haven't created a requirements.txt file, you can do so by running:
+
+pip install flask flask_sqlalchemy werkzeug requests
+
+pip freeze > requirements.txt
+
+4. Install the dependencies:
 
 pip install -r requirements.txt
 
--Initialize the database:
+5. Set the environment to development and initialize the database:
+
+For Unix-based systems:
+
+export FLASK_ENV=development
 
 python init_db.py
 
--Run the application:
+For Windows:
+
+set FLASK_ENV=development
+
+python init_db.py
+
+6. Run the application:
+
+For Unix-based systems:
+
+export FLASK_ENV=development
 
 flask run
 
--Run the tests:
+For Windows:
 
-python -m unittest test_app.py
+set FLASK_ENV=development
+
+flask run
+
 
 **Usage**
 
