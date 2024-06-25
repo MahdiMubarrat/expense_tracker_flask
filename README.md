@@ -75,13 +75,13 @@ pip install -r requirements.txt
 
 5. Set the environment to development and initialize the database:
 
-For Unix-based systems:
+**For Unix-based systems:**
 
 export FLASK_ENV=development
 
 python init_db.py
 
-For Windows:
+**For Windows:**
 
 set FLASK_ENV=development
 
@@ -89,13 +89,13 @@ python init_db.py
 
 6. Run the application:
 
-For Unix-based systems:
+**For Unix-based systems:**
 
 export FLASK_ENV=development
 
 flask run
 
-For Windows:
+**For Windows:**
 
 set FLASK_ENV=development
 
