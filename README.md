@@ -119,6 +119,92 @@ Navigate to /add_transaction to add a new expense or income.
 Set Budget:
 Navigate to /set_budget to set a monthly budget for a specific category.
 
+**Running Tests**
+
+**Setting Up for Tests**
+
+Before running the tests, ensure your Flask environment is set to testing and initialize the test database:
+
+Set the Flask environment to testing and initialize the test database:
+
+**For Unix-based systems:**
+
+export FLASK_ENV=testing
+
+python init_db.py
+
+**For Windows:**
+
+set FLASK_ENV=testing
+
+python init_db.py
+
+**Run the tests:**
+
+python -m unittest test_app.py
+
+**Detailed Test Instructions**
+
+The test_app.py file includes various tests to ensure the functionality of the Expense Tracker application. Here are the tests included:
+
+test_signup: Tests user registration.
+
+test_login: Tests user login.
+
+test_invalid_login: Tests login with invalid credentials.
+
+test_calculate_spending: Tests the calculation of user spending.
+
+test_get_exchange_rate: Tests fetching the exchange rate.
+
+test_convert_currency: Tests currency conversion.
+
+test_calculate_spending_patterns: Tests the calculation of spending patterns over time.
+
+test_add_transaction: Tests adding a transaction.
+
+test_edit_transaction: Tests editing a transaction.
+
+test_delete_transaction: Tests deleting a transaction.
+
+test_set_budget: Tests setting a budget.
+
+test_edit_budget: Tests editing a budget.
+
+test_delete_budget: Tests deleting a budget.
+
+test_exceed_budget_notification: Tests budget exceed notifications.
+
+test_dashboard_access_without_login: Tests dashboard access without login.
+
+test_logout: Tests user logout.
+
+**Example Usage of Tests**
+
+Here's a step-by-step example of how to run a specific test:
+
+Ensure the virtual environment is activated:
+
+source venv/bin/activate  # On Windows use 'venv\Scripts\activate'
+
+Set the Flask environment to testing and run a specific test function:
+
+**For Unix-based systems:**
+
+export FLASK_ENV=testing
+
+python init_db.py  # Initialize the test database
+
+python -m unittest test_app.ExpenseTrackerTestCase.test_signup
+
+**For Windows:**
+
+set FLASK_ENV=testing
+
+python init_db.py  # Initialize the test database
+
+python -m unittest test_app.ExpenseTrackerTestCase.test_signup
+
 **File Descriptions**
 
 app.py: Contains the main application code, including routes, models, and utility functions.
