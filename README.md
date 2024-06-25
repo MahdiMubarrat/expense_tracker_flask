@@ -18,7 +18,7 @@ The Expense Tracker is a Python Flask application that allows users to manage th
 
 **Transaction History**
 
-Displays a transaction history for each user, showing a list of past expenses and income, along with relevant details (amount, category, date).
+-Displays a transaction history for each user, showing a list of past expenses and income, along with relevant details (amount, category, date).
 
 **Budgeting**
 
@@ -36,22 +36,22 @@ Displays a transaction history for each user, showing a list of past expenses an
 
 **Data Visualization**
 
-Implements a simple textual and visual representation of the user's spending patterns over time.
+-Implements a simple textual and visual representation of the user's spending patterns over time.
 
 **Currency Converter**
 
-Includes a basic currency converter to allow users to input expenses in different currencies.
+-Includes a basic currency converter to allow users to input expenses in different currencies.
 
 **Testing**
 
-Unit tests are written for critical parts of the code using the unittest library.
+-Unit tests are written for critical parts of the code using the unittest library.
 
 
 **Installation and Setup**
 
 -Clone the repository:
 
-git clone <repository_url>
+git clone https://github.com/MahdiMubarrat/expense_tracker_flask
 
 cd EXPENSE_TRACKER_FLASK
 
